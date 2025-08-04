@@ -3,8 +3,7 @@
 This repository contains the source code and PDF for a theoretical physics paper exploring the concept of a photon's quantum reference frame (QRF).
 
 ### **Abstract**
-> We propose a phenomenological model for describing physics from a photon-centered quantum reference frame (QRF)[cite: 1]. [cite_start]Our approach combines first-principles constraints with a minimal phenomenological layer to capture complex quantum-optical effects while retaining regulator-independent, gauge-invariant observables[cite: 2]. [cite_start]In contrast to the classical no-go result that no inertial rest frame exists for a photon, we show that a superposition of ultra-relativistic Lorentz boosts, conditioned on the photon's quantum state, can operationally realize a photon's perspective[cite: 3]. [cite_start]We make the construction explicit by (i) specifying the operator map and its domain, (ii) choosing an explicit light-front regularization scheme and proving that our key observables are independent of the regulator, and (iii) bounding massless little-group (E(2)) effects relative to our leading signals[cite: 4]. [cite_start]We then give a concrete Hong–Ou–Mandel (HOM) interferometer design and error budget that could resolve the predicted visibility change at the $3\times 10^{-4}$ level, and reframe an atom-interferometer prediction as a future target with scaling plots[cite: 5]. [cite_start]We position the work within the quantum-reference-frame (QRF) and relativistic quantum information (RQI) literature and conclude with an outlook toward a full group-theoretic massless-QRF formalism[cite: 6].
-
+> We propose a phenomenological model for describing physics from a photon-centered quantum reference frame (QRF). Our approach combines first-principles constraints with a minimal phenomenological layer to capture complex quantum-optical effects while retaining regulator-independent, gauge-invariant observables. In contrast to the classical no-go result that no inertial rest frame exists for a photon, we show that a superposition of ultra-relativistic Lorentz boosts, conditioned on the photon's quantum state, can operationally realize a photon's perspective. We make the construction explicit by (i) specifying the operator map and its domain, (ii) choosing an explicit light-front regularization scheme and proving that our key observables are independent of the regulator, and (iii) bounding massless little-group (E(2)) effects relative to our leading signals. We then give a concrete Hong–Ou–Mandel (HOM) interferometer design and error budget that could resolve the predicted visibility change at the $3\times 10^{-4}$ level, and reframe an atom-interferometer prediction as a future target with scaling plots. We position the work within the quantum-reference-frame (QRF) and relativistic quantum information (RQI) literature and conclude with an outlook toward a full group-theoretic massless-QRF formalism.
 ---
 
 ### **Authorship and Origin: A Human-AI Collaboration** 🤖
@@ -37,7 +36,7 @@ The goal of this repository is to be fully transparent about the process. This i
 
 * `Photon Reference V25.tex`: The main LaTeX source file for the paper.
 * `Photon Reference V25.pdf`: The compiled PDF of the paper.
-* `readme.md`: This file, explaining the project's context.
+* `README.md`: This file, explaining the project's context.
 
 ### Use and Attribution
 
