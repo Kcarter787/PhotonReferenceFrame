@@ -1,0 +1,374 @@
+\documentclass[aps,11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage[table]{xcolor}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{bm}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{amsthm}
+\usepackage{tensor}
+\usepackage{tikz}
+\usepackage{tikz-feynman}
+\usepackage{array,tabularx,booktabs}
+\usepackage{enumitem}
+\usepackage{siunitx}
+\usepackage{physics}
+\usepackage{mathtools}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  citecolor=blue,
+  urlcolor=blue
+}
+
+\providecommand{\bra}[1]{\langle #1|}
+\providecommand{\ket}[1]{|#1\rangle}
+\providecommand{\braket}[2]{\langle #1|#2\rangle}
+\providecommand{\expval}[1]{\langle #1 \rangle}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\kplus}{k^{+}}
+\newcommand{\kperp}{\mathbf{k}_{\perp}}
+\newcommand{\kbar}{\bar{k}^{+}}
+\newcommand{\ktil}{\tilde{k}^{+}}
+\newcommand{\alphahom}{\alpha_{\text{HOM}}}
+\newcommand{\betahom}{\beta_{\text{HOM}}}
+
+\newtheorem{prop}{Proposition}
+\newtheorem{lem}{Lemma}
+\newtheorem{thm}{Theorem}
+\newtheorem{remark}{Remark}
+\newtheorem{definition}{Definition}
+
+\begin{document}
+
+\title{A Phenomenological Model for the Photon's Quantum Reference Frame:\\
+Formal Development, Regulator-Independent Predictions, and Experimental Design}
+
+\author{(Author names omitted for preprint)}
+\date{\today}
+\maketitle
+
+\begin{abstract}
+We propose a phenomenological model for describing physics from a photon-centered quantum reference frame (QRF). Our approach combines first-principles constraints with a minimal phenomenological layer to capture complex quantum-optical effects while retaining regulator-independent, gauge-invariant observables. In contrast to the classical no-go result that no inertial rest frame exists for a photon, we show that a superposition of ultra-relativistic Lorentz boosts, conditioned on the photon's quantum state, can operationally realize a photon's perspective. We make the construction explicit by (i) specifying the operator map and its domain via a completely positive (CP) instrument (with an associated unitary dilation), (ii) choosing an explicit light-front regularization scheme and proving that key observables are regulator-independent (dominated-convergence with off-diagonal control), and (iii) bounding massless little-group (E(2)) effects relative to the leading signal, including a worked Gaussian example. We then give a concrete Hong--Ou--Mandel (HOM) interferometer design and error budget that could resolve the predicted visibility change at the $3\times 10^{-4}$ level, and reframe an atom-interferometer prediction as a future target with scaling plots. We position the work within the quantum-reference-frame (QRF) and relativistic quantum information (RQI) literature and conclude with an outlook toward a full group-theoretic massless-QRF formalism.
+\end{abstract}
+
+\section{Introduction and Positioning}\label{sec:intro}
+The quantum reference frame (QRF) programme promotes frames to quantum systems undergoing conditional, state-dependent transformations. While QRFs for massive particles are well-developed, a consistent description from the perspective of a \emph{massless} photon remains challenging due to (i) the absence of a classical rest frame, (ii) light-front zero modes (\(\kplus\!\to0\)) and regularization subtleties, and (iii) the massless little group \(E(2)\). Our aim is to provide an \emph{operational} construction of a photon's QRF that respects these constraints while yielding concrete, falsifiable predictions.
+
+\paragraph{Related work.}
+Foundational QRF results showed that physical laws can be written covariantly under quantum frame changes and that rest frames of quantum systems can be meaningfully defined in the massive case~\cite{Giacomini2019,Vanrietvelde2020}. In relativistic quantum information it is known that Lorentz boosts entangle degrees of freedom and can change observable coherences (e.g., spin-momentum coupling)~\cite{PeresTerno2002,Streiter2021}. On the field-theory side, the light-front (``front form'') pioneered by Dirac and developed by Brodsky--Pauli--Pinsky provides both computational advantages and well-known zero-mode pathologies~\cite{Dirac1949,Brodsky1998}. Our contribution is to (i) extend the QRF idea to a massless photon with an explicit operator map and domain, (ii) show regulator-independent leading observables under an explicit light-front regularization, and (iii) design a concrete HOM experiment to seek the predicted scaling signature.
+
+\section{Light-Front Coordinates and Notation}\label{sec:lightfront_primer}
+We adopt \(x^\pm=t\pm z\), \(\mathbf{x}_\perp=(x,y)\), with metric \(ds^2=dx^+dx^--d\mathbf{x}_\perp^2\). For massless momenta \(p^\mu\), the on-shell condition reads \(p^+p^-=\vb{p}_\perp^2\). A boost of rapidity \(\eta\) along \(z\) rescales \(k^\pm\to e^{\pm\eta}k^\pm\). States are described on the light-front using the measure
+\begin{equation}
+d\mu(k)= \frac{d\kplus\, d^2\kperp}{2\kplus(2\pi)^3}\, \theta(\kplus)\,.
+\end{equation}
+We work in light-cone gauge \(A^+=0\) to retain only physical photon polarizations. Intensity observables (e.g., HOM visibilities) are gauge invariant; gauge-like phases induced by null translations cancel in intensities (see App.~\ref{app:E2bound} and \ref{app:pol}).
+
+\begin{definition}[State class]\label{def:stateclass}
+Photon wavepackets satisfy: (i) \(\Psi\in L^2(d\mu)\) with finite second moments; (ii) support bounded away from zero: there exists a fixed \(\epsilon_0>0\) \emph{independent of the regulator} such that \(\kplus\ge \epsilon_0\) a.e.; (iii) sub-Gaussian tails in \(\kplus\), implying \(\Psi\in L^1\cap L^2\) and hence \(\|\Psi\|_1<\infty\).
+\end{definition}
+
+\section{Transformation to the Photon’s Frame}\label{sec:framework}
+
+\subsection{Operator Map and Domain (CP-instrument presentation)}\label{sec:map}
+We implement the photon-QRF as a \emph{selective} CP operation on the system induced by a coherently controlled boost on photon+system and subsequent conditioning on a fixed photon reference state (see App.~\ref{app:F} for the dilation).
+
+Define the Kraus operator
+\begin{equation}\label{eq:Kdef_main}
+K[\Psi]\;=\;\int d\mu_{m_\gamma}(k)\,\Psi(\kplus,\kperp)\; U[\Lambda(k\!\to\!\tilde k)]\,,
+\end{equation}
+where \(U[\Lambda(k\!\to\!\tilde k)]\) is the (single- or few-particle) unitary representation of the Lorentz transformation that maps \(k^\mu\) to a fiducial \(\tilde k^\mu\) along \(z\).\footnote{For a scalar system mode with momentum \(p\), \((U[\Lambda]\phi)(p)=\sqrt{\frac{2p^0}{2(\Lambda^{-1}p)^0}}\,\phi(\Lambda^{-1}p)\); for spins/polarizations, include the appropriate Wigner rotation. In this work we restrict to scalar-like temporal/spatial degrees relevant for timing/visibility.}
+\emph{Mathematical convention.} The operator integral in \eqref{eq:Kdef_main} is taken as a \emph{Bochner integral} in the strong operator topology; the map \(k\mapsto U[\Lambda(k\!\to\!\tilde k)]\) is strongly continuous on the regulated support.
+
+The selective update for an input \(\rho_S\) is
+\begin{equation}\label{eq:selective_update}
+\rho_S\;\mapsto\;\Phi(\rho_S)\;=\;\frac{K[\Psi]\;\rho_S\;K[\Psi]^\dagger}{\Tr\!\big[K[\Psi]\;\rho_S\;K[\Psi]^\dagger\big]}\,.
+\end{equation}
+
+\begin{lem}[Boundedness and non-isometry]\label{lem:bounded}
+On the regulated domain, \(K[\Psi]\) is bounded and
+\(
+\|K[\Psi]\|\le \|\Psi\|_{1}
+\),
+so for any \(\ket{\phi}\),
+\(
+\|K[\Psi]\ket{\phi}\|\le \|\Psi\|_{1}\,\|\ket{\phi}\|\).
+Equality requires \(U[\Lambda(k\!\to\!\tilde k)]\ket{\phi}\) to be collinear in \(k\) a.e. Thus unless \(U[\Lambda(k\!\to\!\tilde k)]\) is \(k\)-independent on the support of \(\Psi\), \(K[\Psi]\) is a strict contraction on a dense set and not an isometry.
+\end{lem}
+
+\begin{remark}[Non-reciprocity]
+The selective map \eqref{eq:selective_update} is generically non-invertible (no CPTP left-inverse) unless \(U_k\) is constant; see Prop.~\ref{prop:inverse} in App.~\ref{app:F}. Reciprocity at the global level holds in the unitary dilation before conditioning and discarding the record.
+\end{remark}
+
+\subsection{Regularization Scheme and Regulator-Independent Observables}\label{sec:reg}
+We render \(d\mu(k)\) well-defined with a small photon-mass regulator \(m_\gamma>0\) (removed at the end):
+\begin{equation}
+d\mu_{m_\gamma}(k)=\frac{d\kplus\, d^2\kperp}{2\kplus(2\pi)^3}\,\theta(\kplus),\qquad
+k^-=\frac{\kperp^2+m_\gamma^2}{2\kplus}\,.
+\end{equation}
+\emph{Crucial assumption for dominated convergence:} we impose the fixed cutoff from Def.~\ref{def:stateclass}, \(\kplus\ge\epsilon_0>0\).
+
+\begin{thm}[Regulator independence for moment-ratio observables]\label{thm:reg_indep}
+Let \(\Psi\) satisfy Def.~\ref{def:stateclass}. Then, as \(m_\gamma\to 0\),
+\begin{equation}
+\frac{\Var_{m_\gamma}(\kplus)}{\big(\E_{m_\gamma}[\kplus]\big)^2}\;\longrightarrow\;
+\frac{\Var(\kplus)}{\big(\kbar\big)^{2}}\,,
+\end{equation}
+with convergence justified by dominated convergence on the fixed support, using sub-Gaussian domination. Any intensity observable whose dependence enters through \(\Var(\eta)\) (e.g., HOM visibility) inherits this regulator independence. Off-diagonals of \(K^\dagger K\) are controlled by Lemma~\ref{lem:offdiag} in App.~\ref{app:D}.
+\end{thm}
+
+\begin{lem}[Small-spread mapping]\label{lem:varmap}
+For \(\eta=\ln(\kplus/\ktil)\) and small fractional spread \(\sigma_{\kplus}/\kbar\ll1\),
+\begin{equation}
+\Var(\eta)=\frac{\Var(\kplus)}{\big(\kbar\big)^{2}}+O\!\left(\left(\frac{\sigma_{\kplus}}{\kbar}\right)^{3}\right).
+\end{equation}
+\end{lem}
+
+\subsection{E(2) Little Group: Bound on Neglected Terms}\label{sec:E2}
+Composing non-collinear boosts induces Wigner rotations and null translations in the massless little group \(E(2)\). For small transverse spreads and rapidities relevant here,
+\begin{equation}
+|\theta_W(k)| \le C\, \frac{\|\kperp\|^{2}}{(\kplus)^{2}}\qquad (C=\mathcal O(1)).
+\end{equation}
+\emph{Mini-derivation.} For small boosts \(\vb{\theta}_\perp\) transverse to \(\hat z\),
+the Lorentz algebra gives \([K_i,K_j]=-\,\epsilon_{ijk}J_k\) so a product of two tilts yields a rotation \(R_k\) of angle \(\tfrac12\,\theta_i\theta_j\) about \(\hat z\); isotropically \(|\theta_W|\le \tfrac12\|\vb{\theta}_\perp\|^2\). For a lightlike momentum, \(\|\vb{\theta}_\perp\|\sim \|\kperp\|/(\kplus)\)~\cite{Wigner1939,Weinberg1995}. Hence the stated bound. In HOM, coincidence probabilities are intensities; null-translation phases cancel to first order, so the visibility correction satisfies
+\begin{equation}\label{eq:E2bound}
+|\Delta V_{E(2)}| \le C'\, \frac{\E[\|\kperp\|^{4}]}{\big(\kbar\big)^{4}} \ll \alphahom\left(\frac{\sigma_{\kplus}}{\kbar}\right)^{2}\,.
+\end{equation}
+With \(\theta_{\rm rms}\!\sim\!\mathrm{mrad}\) the resulting correction is \(\ll10^{-6}\) in visibility units, well below our leading effect (App.~\ref{app:E2bound}). Polarization Wigner rotations share this scaling and are likewise \(\ll10^{-6}\).
+
+\section{Transformed Observables and State-Dependent Spacetime}\label{sec:operators}
+Observables are evaluated on the selectively updated state \(\rho'_S\). The entanglement between \(\kplus\) and system coordinates induces a state-dependent blur of classical events. For a world-line \(z(t)\) probed semiclassically and small rapidities, \(z'\approx z(t)-t\hat\eta\) with \(\hat\eta=\ln(\hat{\kplus}/\ktil)\), so
+\begin{equation}\label{eq:dzvar}
+(\Delta z')^{2} = \Var(z(t)-t\hat\eta)\approx t^{2}\Var(\hat\eta)\approx t^{2}\left(\frac{\sigma_{\kplus}}{\ktil}\right)^{2}\!,
+\end{equation}
+see App.~\ref{app:A}.
+
+\section{Experimental Predictions and Designs}\label{sec:experiments}
+
+\subsection{Hong--Ou--Mandel (HOM) Interferometry}\label{sec:HOM}
+The photon-QRF transform induces an effective timing jitter on one interferometer arm (or a controlled fraction thereof), reducing visibility. For small spreads,
+\begin{equation}
+\Delta V_{\text{QRF}}=\alphahom\!\left(\frac{\sigma_{\kplus}}{\kbar}\right)^{2}, \qquad \alphahom\in[1/8,1/2]\,.
+\end{equation}
+
+\subsubsection*{Two explicit edge cases}
+Define \(\Delta\tau=\kappa\,\tau_c\,\eta\) (geometry-dependent coupling \(\kappa\)), and let \(c\in\{1,1/\sqrt2\}\) encode single-arm vs.\ symmetric split of the relative delay. Linearizing \(V=V_0\E[C(\Delta\tau)]\) with \(C''(0)=-1/\tau_c^2\) gives
+\(\Delta V=(\kappa^2 c^2/2)\,\Var(\eta)\).
+Using Lemma~\ref{lem:varmap}:
+\begin{align*}
+\text{(i) Single-arm, full coupling: } & \kappa=1,\; c=1 \;\Rightarrow\; \alphahom=\tfrac12.\\
+\text{(ii) Symmetric split, partial coupling: } & \kappa=\tfrac{1}{\sqrt{2}},\; c=\tfrac{1}{\sqrt{2}} \;\Rightarrow\; \alphahom=\tfrac18.
+\end{align*}
+These establish the advertised range with clean, physically transparent cases.
+
+\subsubsection*{Concrete design, control, and error budget}
+We propose a fiber-based HOM interferometer using spectrally factorable SPDC photon pairs at \(\lambda\in[810,\;1550]~\si{nm}\). One photon serves as the QRF probe; the partner is interfered on a 50:50 beamsplitter. Tunable bandwidth filtering changes \(\sigma_{\kplus}/\kbar\) while holding other parameters fixed. A \emph{control slope} is obtained by filtering both arms identically; the expected slope is \(0\pm\delta\).
+
+\begin{itemize}[leftmargin=1.2em]
+\item \textbf{Source:} CW-pumped type-II SPDC with programmable optical filters; target fractional bandwidths \(\Delta\nu/\nu\in\{1\%,\,3\%,\,5\%,\,8\%\}\).
+\item \textbf{Detectors:} SNSPDs with system jitter \(\le 20~\si{ps}\), dark counts \(<100~\si{s^{-1}}\), efficiency \(>80\%\).
+\item \textbf{Paths:} Fiber delay lines with active stabilization; path-length noise \(\lesssim 20~\si{nm}/\sqrt{\si{Hz}}\).
+\item \textbf{Calibration:} Extract \(\alphahom\) by varying \(\sigma_{\kplus}/\kbar\) and fitting \(\Delta V\) vs. \((\sigma_{\kplus}/\kbar)^2\); confirm zero-slope control. With four equally spaced \(x=(\sigma_{k^+}/\bar k^+)^2\) points and homoscedastic errors \(\sigma_V\), the slope s.d. is \(\sigma_m=\sigma_V/\sqrt{S_{xx}}\) with \(S_{xx}=\sum (x_i-\bar x)^2\).
+\end{itemize}
+
+\paragraph{Error budget and sensitivity.}
+Table~\ref{tab:budget} specifies ordinary visibility-degrading mechanisms and target bounds so the QRF term remains resolvable. For shot-noise-limited counting, \(\delta V \sim 10^{-4}\) requires \(N_{\rm eff}\sim 10^{8}\) coincidences. At \(50~\si{kHz}\) this is \(\sim 30\)–\(60\) minutes per bandwidth setting, enabling a slope fit with \(>3\sigma\) sensitivity to \(\Delta V\approx 3\times 10^{-4}\).
+
+\begin{table}[t]
+\centering
+\caption{HOM visibility error budget (targets to resolve \(\Delta V\sim 3\times 10^{-4}\)).}
+\label{tab:budget}
+\begin{tabular}{@{}lccp{7.5cm}@{}}
+\toprule
+Mechanism & Symbol & Target contribution & Mitigation / calibration \\
+\midrule
+Spectral distinguishability & \(1-V_{\text{spec}}\) & \(<1.0\times10^{-4}\) & Factorable SPDC; symmetric filters; verify via joint spectral intensity. \\
+Spatial/mode mismatch & \(1-V_{\text{mode}}\) & \(<1.0\times10^{-4}\) & Single-mode fiber; active alignment; coupling fringes. \\
+Detector timing jitter & \(1-V_{\text{jitter}}\) & \(<0.5\times10^{-4}\) & SNSPDs \(\le 20~\si{ps}\); deconvolution; keep \(\tau_c\gg\sigma_{\text{det}}\). \\
+Path-length noise & \(1-V_{\text{path}}\) & \(<0.5\times10^{-4}\) & Piezo stabilization; enclosures; reference laser. \\
+Background/dark counts & \(1-V_{\text{bg}}\) & \(<0.2\times10^{-4}\) & Gated detection; subtract accidentals; high heralding efficiency. \\
+\midrule
+\textbf{QRF signal (tunable)} & \(\Delta V_{\text{QRF}}\) & \(\approx3.1\times10^{-4}\) @ \(5\%\) & Extract from slope in \(\Delta V\) vs.~\((\sigma_{\kplus}/\kbar)^2\). \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Discussion, Outlook, and Reproducibility}\label{sec:discussion}
+\paragraph{Summary.} We gave an explicit operational map as a CP instrument with a unitary dilation, a regulator choice with regulator-independent observables (including off-diagonal control), a bound on massless little-group effects (with null translations accounted for), and a concrete HOM design with a control slope. The formalism is non-reciprocal after conditioning, consistent with the lightlike nature of the photon.
+
+\paragraph{Outlook.} A next step is a perspective-neutral or induced-representation approach that treats \(E(2)\) exactly and clarifies reciprocity for lightlike frames. Another is a full field-theoretic treatment including polarization at the same order as timing effects, and exploration of multi-photon reference frames.
+
+\paragraph{Reproducibility.} A minimal code package (symbolic + numeric) can reproduce \(\Delta V_{\rm QRF}\) from the chosen regulator, fit \(\alphahom\) vs.~bandwidth, and generate the atom-interferometer scaling plots. A step-by-step recipe is given in App.~\ref{app:repro}.
+
+\appendix
+
+\section{Coordinate Uncertainty: Limits and Robustness}\label{app:A}
+Consider a classical event with lab coordinates \((t,z(t))\). With \(\hat\eta=\ln(\hat{\kplus}/\ktil)\) and small rapidities,
+\(z'\approx z(t)-t\hat\eta\), hence
+\((\Delta z')^2=\Var(z(t)-t\hat\eta)=t^2\Var(\hat\eta)\).
+For \(\hat\eta\approx (\hat{\kplus}-\ktil)/\ktil\), \(\Var(\hat\eta)\approx (\sigma_{\kplus}/\ktil)^{2}\), giving Eq.~\eqref{eq:dzvar}.
+
+\section{HOM Visibility Loss, Jitter Mapping, and \texorpdfstring{$\alphahom$}{alpha\_HOM} Range}\label{app:B}
+Let \(C(\tau)\) be the normalized field autocorrelation of the (smooth, even) spectral envelope, with \(C(0)=1\) and \(C''(0)=-\tau_c^{-2}\) defining \(\tau_c\). For small random delays \(\Delta\tau\) with variance \(\sigma_{\Delta\tau}^{2}\),
+\begin{equation}
+V=V_0\,\E[C(\Delta\tau)]\;\approx\; V_0\!\left(1-\frac{\sigma_{\Delta\tau}^{2}}{2\tau_c^{2}}\right),
+\end{equation}
+so \(\Delta V=\frac{\sigma_{\Delta\tau}^{2}}{2\tau_c^{2}}\). If \(\Delta\tau=\kappa\,\tau_c\,\eta\) and the delay is split symmetrically between arms by a factor \(c\in\{1,1/\sqrt2\}\), then
+\begin{equation}
+\Delta V=\frac{\kappa^2 c^2}{2}\,\Var(\eta)=\alphahom\left(\frac{\sigma_{\kplus}}{\kbar}\right)^{2}
+\end{equation}
+using Lemma~\ref{lem:varmap}. The edge cases in Sec.~\ref{sec:HOM} follow immediately.
+
+\section{Atom Interferometry Dephasing: Scaling \& Break-even}\label{app:C}
+With lasers transverse to the photon's motion, the lab has velocity \(-v\hat{z}\) in the photon's QRF. The laser frequency becomes an operator \(\hat\omega_L'=\gamma(\hat\eta)\omega_L=\cosh(\hat\eta)\omega_L\). The dephasing arises from uncertainty in the momentum kicks \(\hbar k_L\). For Gaussian \(\epsilon=(\kplus-\ktil)/\ktil\), \(\Var(1+\epsilon^2/2)=2\big(\sigma_{\epsilon}^{2}\big)^{2}\). The phase variance
+\begin{equation}
+\Var(\Delta\hat\Phi)\approx
+\left(\omega_LT\frac{v_{\mathrm{atom}}}{c}\right)^{2}
+\left(\frac{\hbar\bar\omega_\gamma}{m_{\mathrm{atom}}c^{2}}\right)^{2}\Var(1+\hat\epsilon^{2}/2)
+\end{equation}
+gives \(\sigma_\phi=\sqrt{\Var(\Delta\hat\Phi)}\) as quoted.
+
+\section{Normalization, Off-diagonal Control, and Regulator Independence}\label{app:D}
+Define
+\begin{equation}
+I_{m_\gamma}[O]\;=\;\iint d\mu_{m_\gamma}(k)\, d\mu_{m_\gamma}(k')\, \Psi^*(k)\Psi(k')\, \bra{\phi} \hat L^\dagger(k\!\to\!\tilde k)\,O\, \hat L(k'\!\to\!\tilde k)\ket{\phi}\,,
+\end{equation}
+with \(O=\mathbb I\) for norms and suitable system operators for observables. Writing \(\eta=\ln(\kplus/\ktil)\) and expanding \(U_{k'}^\dagger U_{k}=\exp[-i(\eta-\eta')G]\) for a Hermitian generator \(G\), we obtain for small spreads
+\begin{equation}
+\bra{\phi}U_{k'}^\dagger U_k\ket{\phi}\;=\;1-\frac{(\eta-\eta')^{2}}{2}\,\Var_\phi(G)\;+\;R_3,
+\end{equation}
+with the remainder controlled by \emph{moments}:
+\begin{equation}
+|R_3|\;\le\; \frac{1}{6}\,\E_\phi(|G|^{3})\,\E\!\left[|\eta-\eta'|^{3}\right].
+\end{equation}
+
+\begin{lem}[Off-diagonal bound with explicit constant]\label{lem:offdiag}
+Let \(\Psi\) satisfy Def.~\ref{def:stateclass} and let the system inputs obey \(\Var_\phi(G)<\infty\) and \(\E_\phi(|G|^{3})<\infty\). Then
+\begin{equation}
+\Big|\,I_{m_\gamma}[\mathbb I] - \|\Psi\|_{m_\gamma,2}^{2}\,\Big|\;\le\; \underbrace{\tfrac12\,\Var_\phi(G)}_{C_G}\,\E_{m_\gamma}\!\big[(\eta-\eta')^{2}\big]\;+\; \frac{1}{6}\,\E_\phi(|G|^{3})\,\E_{m_\gamma}[|\eta-\eta'|^{3}],
+\end{equation}
+where \(\|\Psi\|_{m_\gamma,2}^{2}=\int |\Psi|^{2}\,d\mu_{m_\gamma}\). By sub-Gaussian tails, \(\E[|\eta-\eta'|^{3}]=o(\Var(\eta))\), hence the off-diagonal contribution is \(O(\Var(\eta))\).
+\end{lem}
+
+Ratios of quadratic forms defining our intensity observables reduce to combinations of \(\E_{m_\gamma}[\kplus]\) and \(\Var_{m_\gamma}(\kplus)\) up to \(O(\Var(\eta))\) corrections that vanish in the small-spread regime used experimentally. Dominated convergence on the fixed support yields
+\begin{equation}
+\Delta V_{\rm QRF}= \alphahom \frac{\Var_{m_\gamma}(\kplus)}{\big(\E_{m_\gamma}[\kplus]\big)^{2}}
+\;\xrightarrow[]{\,m_\gamma\to 0\,}\;
+\alphahom \left(\frac{\sigma_{\kplus}}{\kbar}\right)^{2}.
+\end{equation}
+
+\section{Bound on E(2) Corrections (rotations + translations) with a Gaussian example}\label{app:E2bound}
+Parametrize the composed boost as a longitudinal rapidity plus a small transverse tilt \(\vb{\theta}_\perp\). From the algebra \([K_i,K_j]=-\,\epsilon_{ijk}J_k\), two tilts generate a rotation \(|\theta_W|\le \tfrac12\|\vb{\theta}_\perp\|^2\) about \(\hat z\), and \(\|\vb{\theta}_\perp\|\sim \|\kperp\|/(\kplus)\) for massless momenta~\cite{Wigner1939,Weinberg1995}. Null translations produce gauge-like phases and null-plane displacements; in intensity-based HOM observables first-order contributions cancel and the leading effect appears at second order with the same parametric scaling. Expanding the visibility to second order yields
+\begin{equation}
+|\Delta V_{E(2)}|\;\le\; c_3 \,\E[\theta_W^{2}] \;\le\; c_3 \,\E\!\left[\frac{\|\kperp\|^{4}}{(\kplus)^{4}}\right].
+\end{equation}
+\textbf{Gaussian example.} Let \(\kperp\) be zero-mean Gaussian with rms angular spread \(\theta_{\rm rms}\) (so that \(\E[\|\kperp\|^{2}]/\big(\kbar\big)^{2}\approx \theta_{\rm rms}^{2}\)) and \(\kplus\) narrowly distributed about \(\kbar\). Then
+\(
+\E[\|\kperp\|^{4}]/\big(\kbar\big)^{4}\approx 2\,\theta_{\rm rms}^{4}
+\),
+whence \(|\Delta V_{E(2)}|\lesssim 2\,\theta_{\rm rms}^{4}\ll 10^{-6}\) for \(\theta_{\rm rms}\!\sim\!\mathrm{mrad}\).
+
+\section{Unitary Dilation, Instrument Structure, and Reciprocity Deficit}\label{app:F}
+Define the isometry on photon+system
+\begin{equation}
+S \;=\; \int d\mu(k)\;\ket{k}\!\bra{k}_\gamma \,\otimes\, U[\Lambda(k\!\to\!\tilde k)]\,,
+\qquad
+S\big(\ket{\Psi}_\gamma\!\otimes\!\ket{\phi}_S\big)=\int d\mu(k)\,\Psi(k)\,\ket{k}_\gamma\otimes U_k\ket{\phi}_S.
+\end{equation}
+Let \(M=\sum_m M_m\otimes\ket{m}\!\bra{0}_R\) be a pre-measurement on the photon coupled to a record \(R\), with \(\sum_m M_m^\dagger M_m=\mathbb I_\gamma\). The selective operation on the system for outcome \(m\) is
+\begin{equation}\label{eq:instrument}
+\Phi_m(\rho_S)\;=\;\frac{\Tr_{\gamma}\!\left[\,M_m\,S\big(\rho_\gamma\!\otimes\!\rho_S\big)S^\dagger M_m^\dagger\,\right]}{p_m}\,,\qquad
+p_m=\Tr\!\left[\,M_m\,S\big(\rho_\gamma\!\otimes\!\rho_S\big)S^\dagger M_m^\dagger\,\right],
+\end{equation}
+which is CP and trace-nonincreasing; \(\sum_m p_m\,\Phi_m\) is CPTP. Choosing the Kraus density \(M_{\phi_0}=\int d\mu(k)\,\ket{\phi_0}\!\bra{k}\) yields the single-Kraus operation \(\rho\mapsto K\rho K^\dagger\) with \(K\) in \eqref{eq:Kdef_main}.
+
+\paragraph{Laboratory surrogate for \(M_{\phi_0}\).}
+Exact projectors on continuous spectra are idealizations; in optics one approximates \(M_{\phi_0}\) by \emph{mode matching + narrowband filtering} onto \(\ket{\phi_0}\) (or via adaptive homodyne for CV envelopes), which realizes the same instrument to the accuracy needed for our visibility measurement.
+
+\begin{prop}[No CPTP inverse for nontrivial spreads]\label{prop:inverse}
+If \(U_k\) depends nontrivially on \(k\) on the support of \(\Psi\), the selective channel \(\rho\mapsto K\rho K^\dagger\) admits no CPTP left-inverse on any nontrivial set of inputs. Equivalently, branch-selective reciprocity fails generically.
+\end{prop}
+
+\paragraph{Small-spread expansion and reciprocity deficit.}
+For small rapidity fluctuations \(\eta(k)=\ln(\kplus/\ktil)\) and generator \(G\) with \(U_k=\exp[-i\eta(k)G]\), expand around \(\bar\eta=\E[\eta]\):
+\begin{equation}\label{eq:echo}
+K \;\approx\; e^{-i\bar\eta G}\Big(\mathbb I - \tfrac{1}{2}\Var(\eta)\,G^2\Big)\,,
+\qquad \Var(\eta)\simeq \left(\frac{\sigma_{\kplus}}{\kbar}\right)^{2}.
+\end{equation}
+Define a QRF echo that inverts the dilation and reconditions; for pure inputs \(\ket{\phi}\),
+\begin{equation}
+1-F_{\mathrm{echo}}(\ket{\phi}) \;\approx\; \Var(\eta)\,\Var_{\phi}(G) \;+\; \mathcal O\!\big(\Var(\eta)^{2}\big).
+\end{equation}
+
+\section{Polarization, Null Translations, and Gauge}\label{app:pol}
+We work in \(A^+=0\) to keep only physical polarizations. In the HOM configuration (co-polarized, single spatial mode per arm), the coincidence probability depends on second-order field correlations \(G^{(2)}\). A null translation in arm \(j\) contributes a phase \(e^{i\phi_j}\) to the field operator \(E^{(+)}_j\). Then
+\begin{equation}
+G^{(2)}(1,2)\propto \left\langle E^{(-)}_1 E^{(-)}_2 E^{(+)}_2 E^{(+)}_1 \right\rangle
+\;\mapsto\; e^{-i(\phi_1+\phi_2)}e^{+i(\phi_2+\phi_1)}\,G^{(2)}(1,2)=G^{(2)}(1,2),
+\end{equation}
+so first-order null-translation phases cancel identically in intensities; residual effects arise only at second order and are included in the \(E(2)\) bound.
+
+\section{Reproducibility Notes}\label{app:repro}
+\textbf{Goal:} Reproduce (i) HOM scaling plots of \(\Delta V\) vs. \((\sigma_{\kplus}/\kbar)^{2}\) for multiple bandwidths; (ii) atom-interferometer break-even curves.
+
+\paragraph{HOM recipe.}
+\begin{enumerate}[leftmargin=1.25em]
+\item Choose \(\kbar\), bandwidth set \(\{\sigma_{\kplus}/\kbar\}\), and \(\alphahom\in[1/8,1/2]\).
+\item For each bandwidth, draw \(N\) samples of \(\kplus\) from a Gaussian \(\mathcal N(\kbar,\sigma_{\kplus}^{2})\) truncated at \(\kplus>\epsilon_0\) (fixed cutoff); compute sample moments \(\E_{m_\gamma}[\kplus]\), \(\Var_{m_\gamma}(\kplus)\); take \(m_\gamma\to0\).
+\item Compute \(\Delta V=\alphahom\,\Var_{m_\gamma}(\kplus)/\big(\E_{m_\gamma}[\kplus]\big)^{2}\).
+\item Fit \(\Delta V\) vs. \((\sigma_{\kplus}/\kbar)^{2}\); include a zero-slope control.
+\end{enumerate}
+
+\section{References}
+\begin{thebibliography}{99}
+
+\bibitem{Giacomini2019}
+M.~Giacomini, E.~Castro-Ruiz, and {\v C}.~Brukner,
+``Quantum mechanics and the covariance of physical laws in quantum reference frames,''
+\textit{Nature Communications} \textbf{10}, 494 (2019).
+
+\bibitem{Vanrietvelde2020}
+A.~Vanrietvelde, P.~A.~H{\"o}hn, F.~Giacomini, and E.~Castro-Ruiz,
+``A change of perspective: switching quantum reference frames via a perspective-neutral framework,''
+\textit{Quantum} \textbf{4}, 225 (2020).
+
+\bibitem{PeresTerno2002}
+A.~Peres, P.~F.~Scudo, and D.~R.~Terno,
+``Quantum entropy and special relativity,''
+\textit{Phys. Rev. Lett.} \textbf{88}, 230402 (2002).
+
+\bibitem{Streiter2021}
+M.~Streiter, S.~D.~Bartlett, M.~Zych, and {\v C}.~Brukner,
+``Bell inequalities for quantum reference frames,''
+\textit{Phys. Rev. Lett.} \textbf{126}, 240403 (2021).
+
+\bibitem{Dirac1949}
+P.~A.~M.~Dirac,
+``Forms of relativistic dynamics,''
+\textit{Rev. Mod. Phys.} \textbf{21}, 392--399 (1949).
+
+\bibitem{Brodsky1998}
+S.~J.~Brodsky, H.-C.~Pauli, and S.~S.~Pinsky,
+``Quantum chromodynamics and other field theories on the light cone,''
+\textit{Phys. Rep.} \textbf{301}, 299--486 (1998).
+
+\bibitem{Wigner1939}
+E.~P.~Wigner,
+``On unitary representations of the inhomogeneous Lorentz group,''
+\textit{Ann. Math.} \textbf{40}, 149--204 (1939).
+
+\bibitem{Weinberg1995}
+S.~Weinberg,
+\textit{The Quantum Theory of Fields, Vol. I: Foundations}
+(Cambridge University Press, 1995), Chap.~2.
+
+\end{thebibliography}
+
+\end{document}
